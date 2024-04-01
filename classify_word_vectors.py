@@ -62,11 +62,11 @@ def load_data(data_file):
     df = df[pd.notnull(df["Sentence"])]
     df = df[["Tag", "Sentence"]]
 
-    df_t = df.loc[df['Tag'] == 't']
-    df_f = df.loc[df['Tag'] == 'f']
-
-    df_t = df_t.iloc[:len(df_f.index)]
-    df = pd.concat([df_t, df_f], ignore_index=True)
+    # df_t = df.loc[df['Tag'] == 't']
+    # df_f = df.loc[df['Tag'] == 'f']
+    #
+    # df_t = df_t.iloc[:len(df_f.index)]
+    # df = pd.concat([df_t, df_f], ignore_index=True)
 
     df["Sentence"] = df["Sentence"].apply(clean_text)
 
