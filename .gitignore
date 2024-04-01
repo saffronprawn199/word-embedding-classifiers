@@ -1,0 +1,16 @@
+/venv/
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.npy
+*.tar.gz
+.idea/
+
+/embedding_models/
+/data/
+
+
+
+
