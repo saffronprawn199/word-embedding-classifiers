@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Define the input CSV files
+# This script serves as a tool to assist in testing embedding models with any input data file.
+# In the example below, "false_positive_identification_dataset.csv" is utilised.
 
 INPUT_FILES=( "./embedding_models/english_word2vec_CBOW/word2vec_train_epochs_trained_10_english_CBOW_embedding_size_300"
               "./embedding_models/english_word2vec_SG/word2vec_train_epochs_trained_10_english_SG_embedding_size_300"
