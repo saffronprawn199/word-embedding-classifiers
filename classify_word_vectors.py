@@ -17,6 +17,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import accuracy_score
 from nltk.corpus import stopwords
 import argparse
+import pickle
 
 
 os.system("taskset -p 0xff %d" % os.getpid())
@@ -29,6 +30,21 @@ logging.basicConfig(
 
 # Download popular NLTK dataset
 nltk.download("popular")
+
+def save_sklearn_model(model, filename):
+    """
+        Save logistic regression model as pickle file.
+
+        :param model: the actual sklearn model that was trained.
+        :param filename: the name of the file you would like to save it as.
+    """
+
+    # save model
+    # Save the model
+
+    with open(filename + ".pkl", "wb") as file:
+        pickle.dump(model, file)
+
 
 def load_data(data_file):
     """
@@ -46,9 +62,11 @@ def load_data(data_file):
     df = df[pd.notnull(df["Sentence"])]
     df = df[["Tag", "Sentence"]]
 
-    # df_t = df.loc[df['Tag']=='t']
-    # df_f = df.loc[df['Tag'] == 'f'][:len(df_t.index)]
-    # df = pd.concat([df_t, df_f], ignore_index=True)
+    df_t = df.loc[df['Tag'] == 't']
+    df_f = df.loc[df['Tag'] == 'f']
+
+    df_t = df_t.iloc[:len(df_f.index)]
+    df = pd.concat([df_t, df_f], ignore_index=True)
 
     df["Sentence"] = df["Sentence"].apply(clean_text)
 
@@ -103,7 +121,7 @@ def word_averaging(wv, words):
             all_words.add(wv.key_to_index[word])
 
     if not mean:
-        logging.warning("cannot compute similarity with no input %s", words)
+        logging.warning("cannot compute mean of following words %s", words)
         return np.zeros(
             wv.vector_size,
         )
@@ -176,7 +194,7 @@ def print_report(df, y_pred, y_test, y_pred_prob, name, output_file):
     file.close()
 
 
-def train_baseline(df, test_size, random_state):
+def train_baseline(df, test_size, random_state, output_file):
     """
        Splits the dataset into training and testing subsets, creates a classification
        pipeline using a logistic regression model, fits the model to the training data,
@@ -204,15 +222,18 @@ def train_baseline(df, test_size, random_state):
     )
 
     logreg.fit(x_train, y_train)
-    y_pred = logreg.predict(x_test)
 
+    # Save Logistic regression model after training.
+    save_sklearn_model(logreg, "./logistic_regression_models/" + output_file.replace(".txt", ""))
+
+    y_pred = logreg.predict(x_test)
     # Adjust ROC AUC calculation for binary classification
     y_pred_prob = logreg.predict_proba(x_test)
 
     return y_pred, y_test, y_pred_prob
 
 
-def train_w2v_classifier(model, df, test_size, random_state):
+def train_w2v_classifier(model, df, test_size, random_state, output_file):
     """
         Trains a logistic regression classifier using word vectors obtained from a pre-trained
         Word2Vec model. The function tokenizes the text, averages the word vectors, splits the
@@ -243,6 +264,10 @@ def train_w2v_classifier(model, df, test_size, random_state):
 
     logreg = LogisticRegression(n_jobs=-1, max_iter=1000, C=1e5, multi_class="ovr")
     logreg = logreg.fit(x_train_word_average, train["Tag"])
+
+    # Save Logistic regression model after training.
+    save_sklearn_model(logreg, "./logistic_regression_models/" + output_file.replace(".txt", ""))
+
     y_pred = logreg.predict(x_test_word_average)
     y_pred_prob = logreg.predict_proba(x_test_word_average)
 
@@ -259,7 +284,7 @@ def get_w2v_classifier(model, df, output_file, test_size, random_state):
         :param output_file: The name of the file where the classification report will be saved
                             or appended.
     """
-    y_pred, y_test, y_pred_prob = train_w2v_classifier(model, df, test_size, random_state)
+    y_pred, y_test, y_pred_prob = train_w2v_classifier(model, df, test_size, random_state, output_file)
     name = "Classification model using W2V"
 
     print_report(df, y_pred, y_test, y_pred_prob, name, output_file)
@@ -276,7 +301,7 @@ def get_baseline(df, output_file, test_size, random_state):
         :param output_file: The name of the file where the classification report will be saved
                             or appended.
     """
-    y_pred, y_test, y_pred_prob = train_baseline(df, test_size, random_state)
+    y_pred, y_test, y_pred_prob = train_baseline(df, test_size, random_state, output_file)
     name = "Baseline classification model"
 
     print_report(df, y_pred, y_test, y_pred_prob, name, output_file)
@@ -284,6 +309,10 @@ def get_baseline(df, output_file, test_size, random_state):
 
 
 if __name__ == "__main__":
+    # Make directory to store logistic regression and embedding models.
+    os.makedirs("./logistic_regression_models", exist_ok=True)
+    os.makedirs("./embedding_models", exist_ok=True)
+
     parser = argparse.ArgumentParser(
         description="Classify pre-trained word embedding models and baseline classification model."
     )
@@ -349,10 +378,10 @@ if __name__ == "__main__":
     pretrained_model = args.inModelPath
     dataframe = load_data(data)
     if args.baseLine == 1:
-        get_baseline(dataframe, out_file, args.testSetSize, args.random_state)
-        get_w2v_classifier(pretrained_model, dataframe, out_file,  args.testSetSize, args.random_state)
+        get_baseline(dataframe, out_file, args.testSetSize, args.randomState)
+        get_w2v_classifier(pretrained_model, dataframe, out_file,  args.testSetSize, args.randomState)
     else:
-        get_w2v_classifier(pretrained_model, dataframe, out_file,  args.testSetSize, args.random_state)
+        get_w2v_classifier(pretrained_model, dataframe, out_file,  args.testSetSize, args.randomState)
 
 
 

@@ -1,0 +1,24 @@
+Baseline classification model:
+accuracy 0.7913683664610979
+AUC 0.8719930666426517
+              precision    recall  f1-score   support
+
+           t       0.79      0.79      0.79     44465
+           f       0.79      0.79      0.79     44232
+
+    accuracy                           0.79     88697
+   macro avg       0.79      0.79      0.79     88697
+weighted avg       0.79      0.79      0.79     88697
+
+Classification model using W2V:
+accuracy 0.6686020947720892
+AUC 0.7277675380074318
+              precision    recall  f1-score   support
+
+           t       0.67      0.67      0.67     44465
+           f       0.67      0.67      0.67     44232
+
+    accuracy                           0.67     88697
+   macro avg       0.67      0.67      0.67     88697
+weighted avg       0.67      0.67      0.67     88697
+

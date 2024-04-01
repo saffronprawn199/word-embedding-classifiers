@@ -87,6 +87,37 @@ python classify_word_vectors.py --inFilePath English_tagged.csv --inModelPath ./
 
 This README aims to provide clear instructions on how to use the script for classifying sentences into predefined categories using logistic regression and pre-trained word embeddings.
 
+## Description of dataset used for testing embeddings
+
+### News classifier dataset:
+
+
+The dataset, sourced from the media-monitoring organization Novus Group (https://novusgroup.co.za/), 
+comprises recordings from 106 diverse South African radio and television stations, 
+featuring 12 different languages: English, Afrikaans, isiZulu, isiXhosa, Sesotho, Tshivenda, Sepedi, Siswati, Setswana, Ndebele, xiTsonga, and Hindi.
+
+To assemble an exclusive corpus of English sentences, a Language Identifier (LID) was deployed to discern the language of each sentence.
+Those identified as English were incorporated into the code-switched dataset. For this purpose, the FastText model for language identification was employed.
+Subsequently, the examples were categorized into one of five distinct categories: sports data, news data, advertisements, traffic reports, and weather data. 
+This curated and processed collection forms a standalone dataset, which we used here.
+
+
+Examples of sentences in the dataset tagged with their appropriate categories:
+<p float="left">
+  <img src="./images/news_classifier_data_example.png" width="500" />
+</p>
+
+### False positive identification dataset:
+The speech-text data were collected from local South African broadcasting stations and consist of an amalgamation of 
+radio news and television channel data. This collection was obtained from the output of a single 
+Automatic Speech Recognition (ASR) system capable of recognizing all 12 South African languages. 
+The data retrieved from the system were manually labeled to indicate False Positives (FPs) by individuals working for the Novus Group. 
+
+Example snippet of the data:
+<p float="left">
+  <img src="./images/fp_data_example.png" width="500" />
+</p>
+
 
 ## Classification results:
 
@@ -94,7 +125,7 @@ The results from the classification of news and FP (False Positive) can be found
 The baseline classifier employs TF-IDF for creating sentence feature representations. Further help for interpreting the report can be found on: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html.
 
 <p float="left">
-  <img src="./images/file_names.png" width="1000" />
+  <img src="./images/file_names.png" width="500" />
 </p>
 
 ### False positive identification results:
@@ -105,7 +136,7 @@ In this instance, fastText's continuous bag of words (CBOW) model serves as the 
 </p>
 
 ### News classifier results:
-This example demonstrates the use of fastText continuous bag of words (CBOW) as an embedding method for sentences. As illustrated in the image below, using this method achieves a weighted F1-score above 70% between the different classes.
+This example demonstrates the use of word2vec (SG) as an embedding method for sentences. As illustrated in the image below, using this method achieves a weighted F1-score above 70% between the different classes.
 <p float="left">
   <img src="./images/news_classifier_results.png" width="500" />
 </p>
