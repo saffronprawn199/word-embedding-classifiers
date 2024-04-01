@@ -32,8 +32,6 @@ Before running the application, ensure that you have Streamlit installed. If not
 pip install -r requirements.txt
 ```
 
-
-
 ## Overview
 This script classifies sentences into categories using logistic regression. It supports two modes:
 
@@ -88,3 +86,26 @@ python classify_word_vectors.py --inFilePath English_tagged.csv --inModelPath ./
 ```
 
 This README aims to provide clear instructions on how to use the script for classifying sentences into predefined categories using logistic regression and pre-trained word embeddings.
+
+
+## Classification results:
+
+The results from the classification of news and FP (False Positive) can be found in the ./classification directory. 
+The baseline classifier employs TF-IDF for creating sentence feature representations. Further help for interpreting the report can be found on: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html.
+
+<p float="left">
+  <img src="./images/file_names.png" width="1000" />
+</p>
+
+### False positive identification results:
+
+In this instance, fastText's continuous bag of words (CBOW) model serves as the embedding technique for sentences. We achieve an Area Under the Curve (AUC) exceeding 70% across all classes. It's important to highlight, though, the presence of a significant class imbalance between the "t" (true) and "f" (false) categories. Techniques like undersampling could be applied to rectify this imbalance.
+<p float="left">
+  <img src="./images/FP_results.png" width="500" />
+</p>
+
+### News classifier results:
+This example demonstrates the use of fastText continuous bag of words (CBOW) as an embedding method for sentences. As illustrated in the image below, using this method achieves a weighted F1-score above 70% between the different classes.
+<p float="left">
+  <img src="./images/news_classifier_results.png" width="500" />
+</p>
