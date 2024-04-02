@@ -11,12 +11,12 @@ AUC 0.763358381230504
 weighted avg       0.70      0.70      0.70     88697
 
 Classification model using W2V:
-accuracy 0.6779936187244213
-AUC 0.7372900813182639
+accuracy 0.6777681319548575
+AUC 0.7357987060020279
               precision    recall  f1-score   support
 
-           t       0.68      0.67      0.68     44465
-           f       0.67      0.69      0.68     44232
+           t       0.68      0.69      0.68     44465
+           f       0.68      0.67      0.67     44232
 
     accuracy                           0.68     88697
    macro avg       0.68      0.68      0.68     88697

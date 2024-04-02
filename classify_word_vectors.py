@@ -46,7 +46,7 @@ def save_sklearn_model(model, filename):
         pickle.dump(model, file)
 
 
-def load_data(data_file):
+def load_data(data_file, random_state):
     """
        Load and preprocess a dataset from a CSV file. This includes filtering out rows
        where the 'Sentence' column is null, selecting only 'Tag' and 'Sentence' columns,
@@ -62,8 +62,9 @@ def load_data(data_file):
     df = df[pd.notnull(df["Sentence"])]
     df = df[["Tag", "Sentence"]]
 
-    # df_t = df.loc[df['Tag'] == 't']
-    # df_f = df.loc[df['Tag'] == 'f']
+    # Under-sampling code
+    # df_t = df.loc[df['Tag'] == 't'].sample(frac = 1, random_state=random_state)
+    # df_f = df.loc[df['Tag'] == 'f'].sample(frac = 1, random_state=random_state)
     #
     # df_t = df_t.iloc[:len(df_f.index)]
     # df = pd.concat([df_t, df_f], ignore_index=True)
@@ -376,7 +377,7 @@ if __name__ == "__main__":
     data = args.inFilePath
     out_file = args.outFileName
     pretrained_model = args.inModelPath
-    dataframe = load_data(data)
+    dataframe = load_data(data, args.randomState)
     if args.baseLine == 1:
         get_baseline(dataframe, out_file, args.testSetSize, args.randomState)
         get_w2v_classifier(pretrained_model, dataframe, out_file,  args.testSetSize, args.randomState)
