@@ -1,24 +1,24 @@
 Baseline classification model:
-accuracy 0.8056669601225994
-AUC 0.8041397875550964
+accuracy 0.7913683664610979
+AUC 0.8719930666426517
               precision    recall  f1-score   support
 
-           t       0.54      0.41      0.47     44304
-           f       0.86      0.91      0.88    170379
+           t       0.79      0.79      0.79     44465
+           f       0.79      0.79      0.79     44232
 
-    accuracy                           0.81    214683
-   macro avg       0.70      0.66      0.67    214683
-weighted avg       0.79      0.81      0.80    214683
+    accuracy                           0.79     88697
+   macro avg       0.79      0.79      0.79     88697
+weighted avg       0.79      0.79      0.79     88697
 
 Classification model using W2V:
-accuracy 0.7959689402514405
-AUC 0.7237468909492627
+accuracy 0.6587595972806296
+AUC 0.7186872644584191
               precision    recall  f1-score   support
 
-           t       0.53      0.11      0.19     44304
-           f       0.81      0.97      0.88    170379
+           t       0.67      0.64      0.65     44465
+           f       0.65      0.68      0.67     44232
 
-    accuracy                           0.80    214683
-   macro avg       0.67      0.54      0.54    214683
-weighted avg       0.75      0.80      0.74    214683
+    accuracy                           0.66     88697
+   macro avg       0.66      0.66      0.66     88697
+weighted avg       0.66      0.66      0.66     88697
 
