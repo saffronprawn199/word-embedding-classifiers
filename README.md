@@ -103,7 +103,7 @@ This curated and processed collection forms a standalone dataset, which we used 
 
 
 Examples of sentences in the dataset tagged with their appropriate categories:
-<p float="center">
+<p float="left">
   <img src="./images/news_classifier_data_example.png" width="500" />
 </p>
 
