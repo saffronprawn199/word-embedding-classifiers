@@ -129,13 +129,13 @@ The baseline classifier employs TF-IDF for creating sentence feature representat
 </p>
 
 ### False positive identification results:
-In this instance, fastText's continuous bag of words (CBOW) model serves as the embedding technique for sentences. We achieve an Area Under the Curve (AUC) exceeding 70% across all classes. It's important to highlight, though, the presence of a significant class imbalance between the "t" (true) and "f" (false) categories. Techniques like undersampling could be applied to rectify this imbalance.
+In this instance, fastText's continuous bag of words (CBOW)  model serves as the embedding technique for sentences. We achieve an Area Under the Curve (AUC) exceeding 70% across all classes. It's important to highlight, though, the presence of a significant class imbalance between the "t" (true) and "f" (false) categories. Techniques like undersampling could be applied to rectify this imbalance.
 <p float="left">
   <img src="./images/FP_results.png" width="500" />
 </p>
 
 ### News classifier results:
-This example demonstrates the use of word2vec (SG) as an embedding method for sentences. As illustrated in the image below, using this method achieves a weighted F1-score above 70% between the different classes.
+This example demonstrates the use of word2vec Skip-Gram (SG) as an embedding method for sentences. As illustrated in the image below, using this method achieves a weighted F1-score above 70% between the different classes.
 <p float="left">
   <img src="./images/news_classifier_results.png" width="500" />
 </p>
