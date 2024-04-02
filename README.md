@@ -82,7 +82,7 @@ Use the same parameter values as described above. Omit the `--baseLine` flag to 
 
 ## Example:
 ```shell bash
-python classify_word_vectors.py --inFilePath English_tagged.csv --inModelPath ./word2vec_models/word2vec_train_epochs_trained_10_English_CBOW_embedding_size_300 --outFileName classification_report.txt
+python classify_word_vectors.py --inFilePath English_tagged.csv --inModelPath ./embedding_models/word2vec_train_epochs_trained_10_English_CBOW_embedding_size_300 --outFileName classification_report.txt
 ```
 
 This README aims to provide clear instructions on how to use the script for classifying sentences into predefined categories using logistic regression and pre-trained word embeddings.
