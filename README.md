@@ -129,7 +129,7 @@ The baseline classifier employs TF-IDF for creating sentence feature representat
 </p>
 
 ### False positive identification results:
-In this instance, fastText's continuous bag of words (CBOW)  model serves as the embedding technique for sentences. We achieve an Area Under the Curve (AUC) exceeding 70% across all classes. It's important to highlight, though, the presence of a significant class imbalance between the "t" (true) and "f" (false) categories. Techniques like undersampling could be applied to rectify this imbalance.
+In this instance, fastText's continuous bag of words (CBOW)  model serves as the embedding technique for sentences. We achieve an Area Under the Curve (AUC) exceeding 70% across all classes. It's important to highlight, though, the presence of a significant class imbalance between the "t" (true) and "f" (false) categories. In the below image we applied undersampling on the majority class to achieve a more equal class distribution. This prevents the model from becoming biased towards predicting the majority class.
 <p float="left">
   <img src="./images/FP_results.png" width="500" />
 </p>
