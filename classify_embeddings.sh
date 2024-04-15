@@ -26,5 +26,4 @@ for FILE in "${INPUT_FILES[@]}"; do
     train_models "$FILE" "$OUT_NAME"
 done
 
-# Optional: List or move output files
-echo "Models trained. Check the ./fastText_models and ./word2vec_models directories for output."
+echo "Done."
